@@ -25,27 +25,28 @@
          gl-clear-color-rgba
          )
 
- (import (rnrs) (gl) (glut) (agave color rgba))
+ (import (rnrs) (gles gles1) (glut glut) (agave color rgba))
 
  (define (initialize-glut)
-
-   (glutInit (vector 0) (vector ""))
-
-   (glutInitDisplayMode GLUT_DOUBLE))
+   ;(glut-init)
+   ;(glutInitDisplayMode GLUT_DOUBLE)
+   #t
+   )
 
  (define (buffered-display-procedure procedure)
 
-   (glutDisplayFunc
+   (glut-display
 
     (lambda ()
 
       (glMatrixMode GL_MODELVIEW)
 
       (glLoadIdentity)
-
+      
       (procedure)
 
-      (glutSwapBuffers))))
+      ;(glutSwapBuffers)
+      )))
 
  (define background
 
@@ -91,13 +92,14 @@
 
        (begin
 
-         (glBegin mode)
+         ;(glBegin mode)
 
          expr ...
 
-         (glEnd)) )))
+         ;(glEnd)
+         ) )))
 
- (define gl-color-rgba       (apply-rgba glColor4d))
+ (define gl-color-rgba       (apply-rgba glColor4f))
  (define gl-clear-color-rgba (apply-rgba glClearColor))
 
  )
